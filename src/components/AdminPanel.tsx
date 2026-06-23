@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Image, Calendar, List, Trash2, UploadCloud } from 'lucide-react';
 
+{/*Test*/}
 export const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState<'bookings' | 'gallery' | 'reserve'>('bookings');
 
@@ -121,7 +122,7 @@ export const AdminPanel = () => {
             </div>
           )}
 
-          {/* Вкладка: Ручне бронювання */}
+          {/* Booking */}
           {activeTab === 'reserve' && (
             <div className="max-w-md">
               <p className="text-sm text-slate-500 mb-6">Тут адміністратор зможе вручну заблокувати дати, якщо клієнт забронював напряму через Instagram або телефон.</p>
