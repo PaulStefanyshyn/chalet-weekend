@@ -39,7 +39,7 @@ export const Header = () => {
           />
         )}
 
-        <div className={`fixed top-0 right-0 h-screen w-[280px] bg-[#15304D] z-50 transform transition-transform duration-300 ease-in-out flex flex-col p-8 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`fixed top-0 right-0 h-screen w-[280px] bg-[#15304D] z-50 transform transition-transform duration-300 ease-in-out flex flex-col p-8 overflow-y-auto ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
             <span className="text-[#E3DEDE] font-sans font-normal text-[18px] drop-shadow-md">Навігація</span>
             <button onClick={() => setIsOpen(false)} className="text-[#E3DEDE]">
