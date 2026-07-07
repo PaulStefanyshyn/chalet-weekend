@@ -205,10 +205,10 @@ export const AdminPanel = () => {
           {activeTab === 'reserve' && 'Бронювання дат адміністратором'}
         </h1>
 
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 min-h-[400px]">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 min-h-100">
           {activeTab === 'bookings' && (
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse min-w-[600px]">
+              <table className="w-full text-left border-collapse min-w-150">
                 <thead>
                   <tr className="border-b border-slate-200 text-sm text-slate-500">
                     <th className="pb-3 px-4 font-medium">Заїзд</th>
@@ -251,7 +251,7 @@ export const AdminPanel = () => {
                 <h3 className="text-base font-serif font-bold text-slate-800 mb-2">1. Секція «Про нас»</h3>
                 <p className="text-xs text-slate-500 mb-4">Зміна головного великого зображення, що відображається біля списку зручностей.</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                  <div className="w-full aspect-[4/3] bg-slate-200 rounded-xl overflow-hidden border border-slate-300">
+                  <div className="w-full aspect-4/3 bg-slate-200 rounded-xl overflow-hidden border border-slate-300">
                     {photos.find(p => p.id === 999) ? (
                       <img src={photos.find(p => p.id === 999).url} alt="" className="w-full h-full object-cover" />
                     ) : (

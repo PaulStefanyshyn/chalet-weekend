@@ -21,22 +21,24 @@ export const CalendarBlock = (props: CalendarBlockProps) => {
       <h3 className="text-[28px] lg:text-[40px] font-serif text-chalet-dark mb-8 lg:mb-12">Оберіть дати для бронювання</h3>
       
       <div className="w-full grid grid-cols-1 lg:grid-cols-12">
-        <div className="lg:col-span-6 lg:col-start-4 w-full">
-          <div className="bg-white rounded-[24px] p-5 pb-6 lg:p-8 border border-black/5 shadow-sm text-chalet-text-dark">
-            <div className="bg-chalet-dark text-white rounded-xl flex justify-between items-center px-4 py-2.5 lg:py-3.5 text-xs lg:text-sm font-semibold mb-6 select-none">
-          <span className={`cursor-pointer px-2 py-1 hover:opacity-80 ${props.isReserving ? 'opacity-50 pointer-events-none' : ''}`} onClick={() => props.handleMonthChange('prev')}>←</span>
-          <span className="font-sans">{props.monthNames[props.currentDate.getMonth()]} {props.currentDate.getFullYear()}</span>
-          <span className={`cursor-pointer px-2 py-1 hover:opacity-80 ${props.isReserving ? 'opacity-50 pointer-events-none' : ''}`} onClick={() => props.handleMonthChange('next')}>→</span>
-        </div>
+        <div className="lg:col-span-6 lg:col-start-4 w-full max-w-110 mx-auto">
+          <div className="bg-chalet-input rounded-3xl border border-[#15304D]/38 shadow-sm text-chalet-text-dark overflow-hidden flex flex-col">
+            <div className="bg-chalet-dark text-chalet-input flex justify-between items-center px-6 py-5 text-base lg:text-xl font-medium select-none">
+              <span className={`cursor-pointer px-4 hover:opacity-80 transition-opacity ${props.isReserving ? 'opacity-50 pointer-events-none' : ''}`} onClick={() => props.handleMonthChange('prev')}>←</span>
+              <span className="font-sans">{props.monthNames[props.currentDate.getMonth()]} {props.currentDate.getFullYear()}</span>
+              <span className={`cursor-pointer px-4 hover:opacity-80 transition-opacity ${props.isReserving ? 'opacity-50 pointer-events-none' : ''}`} onClick={() => props.handleMonthChange('next')}>→</span>
+            </div>
 
-        <div className="grid grid-cols-7 text-[11px] font-bold opacity-50 mb-3">
-          {props.weekDays.map(d => <div key={d}>{d}</div>)}
-        </div>
+            <div className="p-4 pb-6 lg:p-6 lg:pb-8">
+              <div className="grid grid-cols-7 text-[14px] font-medium text-chalet-text-dark mb-4">
+                {props.weekDays.map(d => <div key={d}>{d}</div>)}
+              </div>
 
-        <div className="grid grid-cols-7 gap-y-2 text-xs font-medium font-sans items-center relative">
-          {props.renderDays()}
-        </div>
-      </div>
+              <div className="grid grid-cols-7 gap-y-2 text-[15px] font-medium font-sans items-center relative">
+                {props.renderDays()}
+              </div>
+            </div>
+          </div>
 
       <div className="flex justify-center gap-8 text-[13px] font-medium mt-6 mb-4 text-chalet-text-dark">
         <div className="flex items-center gap-2.5">
@@ -56,10 +58,10 @@ export const CalendarBlock = (props: CalendarBlockProps) => {
 
       {props.isReserving ? (
          <div className="w-full bg-amber-600 text-white text-xs font-bold py-3.5 rounded-[10px] mt-4 tracking-wide shadow-md flex justify-center items-center gap-2">
-           ⏳ Дати заблоковано: {props.formatTime(props.timeLeft)}
+           Дати заблоковано: {props.formatTime(props.timeLeft)}
          </div>
       ) : (
-         <button onClick={props.startReservation} className="w-full bg-chalet-dark text-white text-xs font-bold py-3.5 rounded-[10px] mt-4 tracking-wide hover:opacity-90 transition-opacity">
+         <button onClick={props.startReservation} className="w-full bg-chalet-dark text-chalet-input text-xs font-bold py-3.5 rounded-[10px] mt-4 tracking-wide hover:opacity-90 transition-opacity">
            Перевірити доступність
          </button>
       )}

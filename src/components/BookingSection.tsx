@@ -19,7 +19,7 @@ interface BookingProps {
 export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, timeLeft, setTimeLeft, isReserving, setIsReserving, setHoldId, holdUntil, setHoldUntil }: BookingProps) => {
   const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
   
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 5, 1));
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [bookedDates, setBookedDates] = useState<number[]>([]);
   
   const [sectionPhotos, setSectionPhotos] = useState<Record<number, string>>({});
@@ -68,7 +68,7 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
           };
 
           data.forEach((b: any) => {
-            let curr = parseDate(b.check_in);
+            const curr = parseDate(b.check_in);
             const end = parseDate(b.check_out);
             while (curr <= end) {
               dates.push(curr.getTime());
@@ -188,9 +188,37 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
         setIsReserving(true);
         setHoldUntil(data.hold_until);
         setTimeLeft(Math.max(0, Math.floor((data.hold_until - Date.now()) / 1000)));
+      } else if (data.error) {
+        alert(data.error === 'Dates already booked' || data.error === 'Dates already held' 
+          ? 'На жаль, ці дати вже зайняті. Оновіть сторінку та спробуйте ще раз.' 
+          : 'Помилка: ' + data.error);
+        
+        fetch('http://localhost:5000/api/bookings/busy-dates')
+          .then(res => res.json())
+          .then(busyData => {
+            const dates: number[] = [];
+            const parseDate = (dateStr: string) => {
+               if (dateStr.includes('T')) {
+                  const d = new Date(dateStr);
+                  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+               } else {
+                  const [y, m, d] = dateStr.split('-').map(Number);
+                  return new Date(y, m - 1, d);
+               }
+            };
+            busyData.forEach((b: any) => {
+              const curr = parseDate(b.check_in);
+              const end = parseDate(b.check_out);
+              while (curr <= end) {
+                dates.push(curr.getTime());
+                curr.setDate(curr.getDate() + 1);
+              }
+            });
+            setBookedDates(dates);
+          }).catch(() => {});
       }
     } catch (err) {
-      alert('Помилка резервування дат');
+      alert('Помилка з\'єднання з сервером');
     }
   };
 
@@ -200,7 +228,7 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
     return `${m}:${s}`;
   };
 
-  const renderCell = (d: Date, isNextMonth: boolean) => {
+  const renderCell = (d: Date, isOutMonth: boolean) => {
     const dTime = d.getTime();
     const sTime = startDate?.getTime();
     const eTime = endDate?.getTime();
@@ -215,25 +243,31 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
     const isSelected = isStart || isEnd || isBetween;
 
     const isBookedDay = isBooked(d);
-    const isBookedStart = isBookedDay && !isBooked(new Date(dTime - 86400000));
-    const isBookedEnd = isBookedDay && !isBooked(new Date(dTime + 86400000));
+    const MS_PER_DAY = 24 * 60 * 60 * 1000;
+    const prevDay = new Date(dTime - MS_PER_DAY);
+    const nextDay = new Date(dTime + MS_PER_DAY);
+    const isBookedStart = isBookedDay && (!isBooked(prevDay) || prevDay.getTime() < today.getTime());
+    const isBookedEnd = isBookedDay && !isBooked(nextDay);
 
-    let className = "w-full h-8 flex items-center justify-center text-[11px] transition-all ";
+    let className = "w-full h-10 flex items-center justify-center text-[15px] transition-all ";
 
     if (isPast) {
       className += "text-black/30 cursor-not-allowed rounded-full ";
     } else if (isBookedDay) {
-      className += "bg-[#3F3E45] text-white font-semibold cursor-not-allowed ";
-      if (isBookedStart) className += "rounded-l-full ";
-      if (isBookedEnd) className += "rounded-r-full ";
+      className += "bg-chalet-text-dark text-chalet-input font-semibold cursor-not-allowed ";
+      if (isBookedStart || d.getDay() === 1) className += "rounded-l-full ";
+      if (isBookedEnd || d.getDay() === 0) className += "rounded-r-full ";
     } else if (isSelected) {
-      className += "bg-chalet-dark text-white font-semibold ";
-      if (isStart && !endDate) className += "rounded-full ";
-      else if (isStart) className += "rounded-l-full ";
-      else if (isEnd) className += "rounded-r-full ";
+      className += "bg-chalet-dark text-chalet-input font-semibold ";
+      if (isStart && !endDate) {
+        className += "rounded-full ";
+      } else {
+        if (isStart || d.getDay() === 1) className += "rounded-l-full ";
+        if (isEnd || d.getDay() === 0) className += "rounded-r-full ";
+      }
     } else {
       className += isReserving ? "cursor-not-allowed opacity-80 rounded-full " : "cursor-pointer hover:bg-black/5 rounded-full ";
-      if (isNextMonth) className += "text-chalet-next-month ";
+      className += isOutMonth ? "text-chalet-next-month " : "text-chalet-text-dark ";
     }
 
     return (
@@ -245,8 +279,10 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
 
   const renderDays = () => {
     const days = [];
-    for (let i = 0; i < shift; i++) {
-      days.push(<div key={`empty-${i}`} className="w-full h-8" />);
+    const prevMonthDays = getDaysInMonth(year, month - 1);
+    
+    for (let i = shift - 1; i >= 0; i--) {
+      days.push(renderCell(new Date(year, month - 1, prevMonthDays - i), true));
     }
     for (let i = 1; i <= daysInCurrentMonth; i++) {
       days.push(renderCell(new Date(year, month, i), false));
@@ -261,8 +297,8 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
   return (
     <section id="booking" className="bg-white lg:bg-chalet-beige lg:pt-12 lg:pb-20 lg:px-6">
       
-      <div className="w-full bg-[#15304D]/15 lg:bg-transparent py-12 px-6 lg:p-0 lg:mb-20">
-        <div className="max-w-[1160px] mx-auto">
+      <div className="w-full bg-chalet-dark/15 lg:bg-transparent py-12 px-6 lg:p-0 lg:mb-20">
+        <div className="max-w-290 mx-auto">
           <CottageBlock 
             activePhoto={activePhoto} 
             sectionPhotos={sectionPhotos} 
@@ -272,7 +308,7 @@ export const BookingSection = ({ startDate, setStartDate, endDate, setEndDate, t
       </div>
       
       <div className="w-full bg-white lg:bg-transparent py-12 px-6 lg:p-0">
-        <div className="max-w-[1160px] mx-auto">
+        <div className="max-w-290 mx-auto">
           <CalendarBlock 
             startDate={startDate}
             endDate={endDate}

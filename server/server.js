@@ -221,12 +221,13 @@ app.post('/api/bookings/confirm', rateLimit, async (req, res) => {
 
   if (holdIndex !== -1) {
     const hold = holds[holdIndex];
+    holds.splice(holdIndex, 1);
+
     try {
       await pool.query(
         'INSERT INTO chalet_bookings (check_in, check_out, pib, phone, comment, status) VALUES (?, ?, ?, ?, ?, "pending")',
         [hold.check_in, hold.check_out, pib, phone, comment]
       );
-      holds.splice(holdIndex, 1);
 
       if (process.env.RESEND_API_KEY && process.env.MANAGER_EMAIL) {
         await fetch('https://api.resend.com/emails', {
@@ -246,6 +247,7 @@ app.post('/api/bookings/confirm', rateLimit, async (req, res) => {
 
       res.json({ success: true });
     } catch (err) { 
+      holds.push(hold);
       res.status(500).json({ error: err.message }); 
     }
   } else {

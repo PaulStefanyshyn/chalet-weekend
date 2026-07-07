@@ -21,7 +21,7 @@ export const CottageBlock = ({ activePhoto, sectionPhotos, setActivePhoto }: Cot
           <img 
             src={activePhoto || sectionPhotos[101]} 
             alt="Chalet Головна" 
-            className="w-full aspect-[4/3] object-cover bg-[#C8C3BC] rounded-[24px]" 
+            className="w-full aspect-4/3 object-cover bg-[#C8C3BC] rounded-3xl" 
           />
           <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
             {[101, 102, 103, 104].map((id, index) => (
@@ -50,8 +50,8 @@ export const CottageBlock = ({ activePhoto, sectionPhotos, setActivePhoto }: Cot
               Від <span className="text-[40px] font-serif text-chalet-dark mx-2">4500</span> грн / ніч
             </div>
             
-            <div className="flex flex-col items-start w-full lg:w-[289px]">
-              <button onClick={() => document.getElementById('calendar-container')?.scrollIntoView({ behavior: 'smooth' })} className="w-full h-14 lg:h-[72px] bg-chalet-dark text-white text-[14px] lg:text-[16px] font-bold rounded-[12px] lg:rounded-[16px] tracking-wide hover:opacity-90 transition-opacity">
+            <div className="flex flex-col items-start w-full lg:w-72.25">
+              <button onClick={() => document.getElementById('calendar-container')?.scrollIntoView({ behavior: 'smooth' })} className="w-full h-14 lg:h-18 bg-chalet-dark text-chalet-input text-[14px] lg:text-[16px] font-bold rounded-xl lg:rounded-2xl tracking-wide hover:opacity-90 transition-opacity">
                 Забронювати
               </button>
               <a href="#about" className="flex items-center gap-2 mt-5 text-[14px] font-semibold text-chalet-text-dark/80 hover:text-chalet-dark transition-colors border-b border-transparent hover:border-chalet-dark w-max pb-0.5">

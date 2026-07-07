@@ -3,7 +3,7 @@ import { Camera, Send } from 'lucide-react';
 export const Footer = () => {
   return (
     <footer className="bg-chalet-dark text-chalet-input/80 pt-16 pb-6 px-6 text-xs border-t border-white/5">
-      <div className="max-w-[1160px] mx-auto grid grid-cols-4 md:grid-cols-12 gap-y-10 md:gap-y-0 items-start mb-16">
+      <div className="max-w-290 mx-auto grid grid-cols-4 md:grid-cols-12 gap-y-10 md:gap-y-0 items-start mb-16">
         
         <div className="col-start-2 col-span-3 md:col-start-3 md:col-span-3">
           <h4 className="font-serif text-[28px] md:text-[22px] text-white mb-2 md:mb-3 leading-none">Chalet Weekend</h4>
