@@ -34,7 +34,7 @@ export const Header = () => {
 
         {isOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 md:hidden"
             onClick={() => setIsOpen(false)}
           />
         )}
