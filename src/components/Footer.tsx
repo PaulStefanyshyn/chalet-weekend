@@ -44,7 +44,7 @@ export const Footer = () => {
       </div>
       <div className="text-center text-[10px] opacity-50 border-t border-white/10 pt-6 font-sans space-y-1.5">
         <p>©Chalet Weekend всі права захищені</p>
-        <p className="tracking-wide">with love, SmmAge 💗</p>
+        <a href="https://www.smmageofficial.com/" className="tracking-wide">with love, SmmAge 💗</a>
       </div>
     </footer>
   );
