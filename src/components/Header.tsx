@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import logo from "../assets/logo.png";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,13 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative">
         <div />
 
+        <img
+          src={logo}
+          alt="Logo"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full object-cover"
+        />
+
+
         <nav className="hidden md:flex items-center gap-8 text-[18px] font-normal text-chalet-input font-sans drop-shadow-md mx-auto">
           <a href="#about" className="hover:opacity-80 transition-opacity">Про нас</a>
           <a href="#booking" className="hover:opacity-80 transition-opacity">Будиночок</a>
@@ -17,23 +25,23 @@ export const Header = () => {
         </nav>
 
         <div className="hidden md:block md:absolute md:right-6">
-          <a 
-            href="#booking" 
+          <a
+            href="#booking"
             className="bg-chalet-dark text-chalet-input px-5 py-3 rounded-[10px] text-[14px] font-normal font-sans drop-shadow-md transition-opacity hover:opacity-90 inline-block text-center"
           >
             Забронювати
           </a>
         </div>
 
-        <button 
-          className="md:hidden z-50 text-chalet-input drop-shadow-md ml-auto" 
+        <button
+          className="md:hidden z-50 text-chalet-input drop-shadow-md ml-auto"
           onClick={() => setIsOpen(true)}
         >
           <Menu size={28} />
         </button>
 
         {isOpen && (
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 md:hidden"
             onClick={() => setIsOpen(false)}
           />
@@ -46,7 +54,7 @@ export const Header = () => {
               <X size={28} />
             </button>
           </div>
-          
+
           <div className="flex flex-col gap-6 font-sans text-[18px] font-normal text-chalet-input drop-shadow-md">
             <a href="#about" onClick={() => setIsOpen(false)}>Про нас</a>
             <a href="#booking" onClick={() => setIsOpen(false)}>Будиночок</a>
