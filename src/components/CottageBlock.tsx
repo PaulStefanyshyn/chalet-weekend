@@ -54,10 +54,6 @@ export const CottageBlock = ({ activePhoto, sectionPhotos, setActivePhoto }: Cot
               <button onClick={() => document.getElementById('calendar-container')?.scrollIntoView({ behavior: 'smooth' })} className="w-full h-14 lg:h-18 bg-chalet-dark text-chalet-input text-[14px] lg:text-[16px] font-bold rounded-xl lg:rounded-2xl tracking-wide hover:opacity-90 transition-opacity">
                 Забронювати
               </button>
-              <a href="#about" className="flex items-center gap-2 mt-5 text-[14px] font-semibold text-chalet-text-dark/80 hover:text-chalet-dark transition-colors border-b border-transparent hover:border-chalet-dark w-max pb-0.5">
-                Детальніше про будиночок
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
             </div>
           </div>
         </div>

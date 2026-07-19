@@ -23,19 +23,19 @@ export const Footer = () => {
         <div className="col-start-3 col-span-2 md:col-start-8 md:col-span-2">
           <h5 className="font-bold text-[15px] md:text-[14px] text-white mb-4 md:mb-5">Контакти</h5>
           <div className="space-y-3 md:space-y-2 font-medium opacity-80 text-[13px]">
-            <p>+380 99 999 99 99</p>
+            <p>+380 67 688 24 77</p>
             <p>@chalet_weekend2023</p>
-            <p>Івано-Франківська обл.,<br className="md:hidden" /> Діл, 1736</p>
+            <p>Івано-Франківська обл.,<br className="md:hidden" /> с. Яблуниця<br className="md:hidden" />, Діл, 1736</p>
           </div>
         </div>
         
         <div className="col-start-1 col-span-4 md:col-start-10 md:col-span-2 flex flex-row md:flex-col items-center md:items-start w-full mt-2 md:mt-0">
           <h5 className="font-bold text-[15px] md:text-[14px] text-white mb-0 md:mb-5 w-1/2 md:w-auto">Ми в соцмережах</h5>
           <div className="flex gap-4 w-1/2 md:w-auto">
-            <a href="#" className="hover:opacity-80 transition-opacity text-white">
+            <a href="https://www.instagram.com/chalet_weekend2023?igsh=N25ydDZjYW5sMnl3" className="hover:opacity-80 transition-opacity text-white">
               <Camera className="w-8 h-8 md:w-6 md:h-6 stroke-[1.5]" />
             </a>
-            <a href="#" className="hover:opacity-80 transition-opacity text-white">
+            <a href="https://t.me/Sandra_HRM" className="hover:opacity-80 transition-opacity text-white">
               <Send className="w-8 h-8 md:w-6 md:h-6 stroke-[1.5]" />
             </a>
           </div>

@@ -24,7 +24,7 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!holdId) {
       alert('Спочатку оберіть дати в календарі та натисніть "Перевірити доступність"!');
       return;
@@ -54,11 +54,11 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
       const res = await fetch('http://localhost:5000/api/bookings/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          id: holdId, 
-          pib, 
-          phone, 
-          comment: `Гостей: ${guests}. ${comment}` 
+        body: JSON.stringify({
+          id: holdId,
+          pib,
+          phone,
+          comment: `Гостей: ${guests}. ${comment}`
         })
       });
 
@@ -88,7 +88,7 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
   return (
     <section id="contacts" className="pt-12 pb-20 px-6 bg-[#FDF8F5] text-chalet-text-dark">
       <div className="max-w-290 mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
-        
+
         <div className="hidden lg:block lg:col-start-2 lg:col-span-11 mb-4">
           <p className="text-[10px] uppercase tracking-widest font-bold opacity-60">Зв'язатися з нами</p>
         </div>
@@ -96,11 +96,11 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
         <div className="lg:col-start-2 lg:col-span-5 flex flex-col justify-start">
           <p className="lg:hidden text-[10px] uppercase tracking-widest font-bold opacity-60 mb-2">Зв'язатися з нами</p>
           <h2 className="text-[32px] lg:text-[44px] leading-tight font-serif mb-6 text-chalet-dark">Забронюйте свій відпочинок<br className="hidden lg:block" /> вже сьогодні</h2>
-          
+
           <div className="text-[14px] leading-relaxed mb-6 font-medium text-chalet-text-dark">
             Напишіть нам, і ми допоможемо обрати найкращий відпочинок для вас.
           </div>
-          
+
           <div className="text-[14px] leading-relaxed mb-10 flex flex-col gap-4 font-medium text-chalet-text-dark">
             <span>При бронюванні від 6 ночей отримуєте вигіднішу вартість проживання</span>
             <span>-10% для військових</span>
@@ -109,7 +109,7 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
           <div className="space-y-5 text-[14px] font-medium text-chalet-text-dark mt-auto lg:pb-0">
             <div className="flex items-center gap-4">
               <Phone className="w-5 h-5 text-chalet-dark stroke-[1.5]" />
-              <span>+380 99 999 99 99</span>
+              <span>+380 67 688 24 77</span>
             </div>
             <div className="flex items-center gap-4">
               <Camera className="w-5 h-5 text-chalet-dark stroke-[1.5]" />
@@ -117,7 +117,7 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
             </div>
             <div className="flex items-center gap-4">
               <MapPin className="w-5 h-5 text-chalet-dark stroke-[1.5]" />
-              <span>Івано-Франківська область,<br className="lg:hidden" /> Діл, 1736</span>
+              <span>Івано-Франківська область,<br className="md:hidden" /> с. Яблуниця,<br className="md:hidden" /> Діл, 1736</span>
             </div>
           </div>
         </div>
@@ -125,18 +125,18 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
         <form className="lg:col-start-8 lg:col-span-4 flex flex-col gap-3.5 w-full mt-4 lg:mt-0 h-full" onSubmit={handleSubmit}>
           <input type="text" value={pib} onChange={e => setPib(e.target.value)} placeholder="Ваше ім'я" required className="w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none focus:border-chalet-dark/40 transition-colors" />
           <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Телефон" required className="w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none focus:border-chalet-dark/40 transition-colors" />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
             <input type="text" value={checkInStr} readOnly placeholder="Дата заїзду" className="w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none" />
             <input type="text" value={checkOutStr} readOnly placeholder="Дата виїзду" className="w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none" />
           </div>
-          
+
           <input type="number" value={guests} onChange={e => setGuests(e.target.value)} placeholder="Кількість гостей" className="hidden lg:block w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none focus:border-chalet-dark/40 transition-colors" />
-          
+
           <textarea value={comment} onChange={e => setComment(e.target.value)} placeholder="Ваше повідомлення" rows={3} className="w-full bg-chalet-input placeholder-chalet-text-dark text-chalet-text-dark font-medium placeholder:font-normal border border-transparent rounded-xl px-4 py-3.5 text-[14px] outline-none resize-none focus:border-chalet-dark/40 transition-colors flex-1"></textarea>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={isSubmitting}
             className={`w-full bg-chalet-dark text-chalet-input text-[14px] font-normal tracking-wide py-4 rounded-xl transition-opacity mt-auto ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
           >
@@ -145,6 +145,15 @@ export const ContactForm = ({ startDate, endDate, holdId, setIsReserving, setTim
         </form>
         
       </div>
+      <div className="w-[60%] h-[400px] rounded-2xl overflow-hidden shadow-lg mt-[60px] mb-10 mx-auto">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2652.8898218954996!2d24.4741201!3d48.3241996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47371f740dc8f6eb%3A0x199a0e399d2f6511!2sChalet%20weekend!5e0!3m2!1suk!2sua!4v1784469971556!5m2!1suk!2sua"
+            className="w-full h-full border-0"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
     </section>
   );
 };

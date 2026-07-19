@@ -15,7 +15,7 @@ export const Amenities = () => {
           if (mainPhoto) setAboutPhotoUrl(mainPhoto.url);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const items = {
@@ -54,28 +54,32 @@ export const Amenities = () => {
   return (
     <section id="about" className="pt-12 pb-20 px-6 bg-white text-chalet-text-dark overflow-hidden">
       <div className="max-w-290 mx-auto w-full">
-        
+
         <div className="hidden lg:block lg:ml-[50%] lg:pl-8 mb-4">
           <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-chalet-text-dark/50 block">Про нас</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-x-16 lg:gap-y-0 h-full">
-          
+
           <div className="block lg:hidden">
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-chalet-text-dark/50 block mb-2">Про нас</span>
             <h2 className="text-[28px] font-serif text-chalet-dark mb-4">Відпочинок, що відновлює</h2>
             <div className="text-[15px] space-y-4 font-normal leading-relaxed text-chalet-text-dark">
-              <p>Ми створили простір, де можна відчути спокій природи, комфорт сучасного будинку та тепло справжнього відпочинку.</p>
-              <p>Тут є все для ідеального вікенду — гори, чан, сауна, затишок і тиша.</p>
+              <p>Шале Weekend — відпочинок у серці Карпат</p>
+              <p>Відчуйте справжній спокій і гармонію серед величних Карпатських гір. Шале Weekend — це місце, де час сповільнюється, а природа наповнює вас енергією та натхненням.</p>
+              <p>Наше шале створене для тих, хто шукає затишок, комфорт і приватність. Панорамні краєвиди, свіже гірське повітря, тиша лісу та тепла атмосфера будинку — усе продумано до деталей, щоб ваш відпочинок став по-справжньому незабутнім.</p>
+              <p>Тут ви зможете насолодитися ранковою кавою з видом на гори, провести вечори біля каміну або просто відновити сили далеко від міського шуму.</p>
+              <p>Шале Weekend — ідеальне місце для романтичного відпочинку, сімейних вихідних чи подорожі з друзями.</p>
+              <p>Шале Weekend — там, де починається ваш спокій.</p>
             </div>
           </div>
 
           <div className="w-full h-full bg-[#D9D9D9] rounded-4xl shadow-sm overflow-hidden flex items-center justify-center">
             {aboutPhotoUrl ? (
-              <img 
-                src={aboutPhotoUrl} 
-                alt="Інтер'єр шале" 
-                className="w-full aspect-4/3 lg:aspect-auto lg:h-full object-cover" 
+              <img
+                src={aboutPhotoUrl}
+                alt="Інтер'єр шале"
+                className="w-full aspect-4/3 lg:aspect-auto lg:h-full object-cover"
                 onError={() => setAboutPhotoUrl('')}
               />
             ) : (
@@ -84,12 +88,16 @@ export const Amenities = () => {
           </div>
 
           <div className="flex flex-col justify-between w-full h-full lg:py-0">
-            
+
             <div className="hidden lg:block">
               <h2 className="text-[32px] font-serif text-chalet-dark mb-5 leading-tight">Відпочинок, що відновлює</h2>
               <div className="text-[15px] space-y-4 font-normal leading-relaxed max-w-lg text-chalet-text-dark">
-                <p>Ми створили простір, де можна відчути спокій природи, комфорт сучасного будинку та тепло справжнього відпочинку.</p>
-                <p>Тут є все для ідеального вікенду — гори, чан, сауна, затишок і тиша.</p>
+                <p>Шале Weekend — відпочинок у серці Карпат</p>
+                <p>Відчуйте справжній спокій і гармонію серед величних Карпатських гір. Шале Weekend — це місце, де час сповільнюється, а природа наповнює вас енергією та натхненням.</p>
+                <p>Наше шале створене для тих, хто шукає затишок, комфорт і приватність. Панорамні краєвиди, свіже гірське повітря, тиша лісу та тепла атмосфера будинку — усе продумано до деталей, щоб ваш відпочинок став по-справжньому незабутнім.</p>
+                <p>Тут ви зможете насолодитися ранковою кавою з видом на гори, провести вечори біля каміну або просто відновити сили далеко від міського шуму.</p>
+                <p>Шале Weekend — ідеальне місце для романтичного відпочинку, сімейних вихідних чи подорожі з друзями.</p>
+                <p>Шале Weekend — там, де починається ваш спокій.</p>
               </div>
             </div>
 
@@ -102,45 +110,45 @@ export const Amenities = () => {
               ))}
             </div>
 
-            <div 
+            <div
               ref={scrollRef}
               onScroll={handleScroll}
               className="w-full overflow-x-auto snap-x snap-mandatory pb-4 flex lg:hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
             >
               {mobileChunks.map((chunk, idx) => (
-              <div key={idx} className="min-w-full shrink-0 snap-center grid grid-cols-3 gap-y-8 px-2">
-                {chunk.map((item, i) => item ? (
-                  <div key={i} className="flex flex-col items-center text-center">
-                    {item.icon}
-                    <span className="text-[11px] font-medium text-chalet-text-dark/80 whitespace-nowrap">{item.label}</span>
-                  </div>
-                ) : (
-                  <div key={i} />
-                ))}
-              </div>
-            ))}
-          </div>
+                <div key={idx} className="min-w-full shrink-0 snap-center grid grid-cols-3 gap-y-8 px-2">
+                  {chunk.map((item, i) => item ? (
+                    <div key={i} className="flex flex-col items-center text-center">
+                      {item.icon}
+                      <span className="text-[11px] font-medium text-chalet-text-dark/80 whitespace-nowrap">{item.label}</span>
+                    </div>
+                  ) : (
+                    <div key={i} />
+                  ))}
+                </div>
+              ))}
+            </div>
 
-          <div 
-             className="w-15 h-4 bg-[#E6E6E6] border border-chalet-dark rounded-full mx-auto mt-2 lg:hidden flex items-center px-1 cursor-pointer"
-             onClick={() => {
-               if (scrollRef.current) {
-                 const isEnd = scrollProgress > 0.5;
-                 scrollRef.current.scrollTo({
-                   left: isEnd ? 0 : scrollRef.current.clientWidth,
-                   behavior: 'smooth'
-                 });
-               }
-             }}
-          >
-             <div 
-               className="w-6 h-2 bg-chalet-dark rounded-full"
-               style={{ transform: `translateX(${scrollProgress * 26}px)` }}
-             ></div>
-          </div>
+            <div
+              className="w-15 h-4 bg-[#E6E6E6] border border-chalet-dark rounded-full mx-auto mt-2 lg:hidden flex items-center px-1 cursor-pointer"
+              onClick={() => {
+                if (scrollRef.current) {
+                  const isEnd = scrollProgress > 0.5;
+                  scrollRef.current.scrollTo({
+                    left: isEnd ? 0 : scrollRef.current.clientWidth,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              <div
+                className="w-6 h-2 bg-chalet-dark rounded-full"
+                style={{ transform: `translateX(${scrollProgress * 26}px)` }}
+              ></div>
+            </div>
 
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );
